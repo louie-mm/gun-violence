@@ -1,0 +1,2 @@
+class MapsException(Exception):
+    pass

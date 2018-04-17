@@ -1,0 +1,14 @@
+.geojson {
+	stroke: #fff;
+	stroke-width: 1;
+}
+
+.killed {
+	fill: rgb(220,0,0);
+	opacity: 1;
+}
+
+.injured {
+	fill: rgb(0,220,0);
+	opacity: 0.15;
+}

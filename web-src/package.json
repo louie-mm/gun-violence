@@ -1,0 +1,40 @@
+{
+  "name": "gun-violence",
+  "version": "1.0.0",
+  "description": "Visualizations on gun violence in the US.",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm install --only=dev",
+    "test": "test",
+    "start": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production"
+  },
+  "author": "Louie Mansour",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^0.28.10",
+    "csv-loader": "^2.1.1",
+    "html-webpack-plugin": "^3.0.6",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11",
+    "webpack-dev-server": "^3.1.1"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "d3": "^4.13.0",
+    "node-sass": "^4.7.2",
+    "nouislider": "^11.1.0",
+    "react-addons-transition-group": "^15.6.2",
+    "react-d3-wrap": "^2.2.1",
+    "topojson-client": "^3.0.0"
+  }
+}
