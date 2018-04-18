@@ -1,0 +1,13 @@
+python_home=~/Documents/gun-violence
+react_home=$python_home/web-src
+
+# PYTHONPATH, keep python core modules in here:
+export PYTHONPATH="${PYTHONPATH}:$python_home"
+
+# FLASK
+export FLASK_APP=$python_home/src/ws/v1/controllers/shootings.py
+alias python_for_flask='. $python_home/venv/bin/activate'
+
+# GUN VIOLENCE ALIASES
+alias gv='python_for_flask && cd $python_home && flask run'
+alias gvfe='cd $react_home && subl . && npm run start'
