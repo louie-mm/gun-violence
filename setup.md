@@ -15,3 +15,7 @@ Load data into mongoDB using `mongorestore dump/`
 Frontend:
 run `brew isntall npm`
 go to frontend home dir ($PROJECT_HOME/web-src) and run `npm install` (This will install from package-lock.json)
+
+Maps:
+Run `npm install mapshaper`
+Example command using mapshaper: `mapshaper USA_adm1.shp -simplify 0.01% -o format=topojson`
