@@ -1,7 +1,7 @@
 import unittest
 
-from src.services.address_service import address_util
-from src.services.address_service.address_exception import AddressException
+from src.services.address_util import address_util
+from src.services.address_util.address_exception import AddressException
 
 
 class TestAddressValidator(unittest.TestCase):

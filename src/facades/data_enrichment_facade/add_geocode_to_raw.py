@@ -1,14 +1,14 @@
 from datetime import datetime
 
-from src.services.db_service import db_constants, db_client
-from src.services.maps_service import maps_client, maps_exception
-from src.services.address_service import address_exception
+from src.services.db_service import db_constants, db_service
+from src.services.maps_service import maps_service, maps_exception
+from src.services.address_util import address_exception
 
 
 class AddGeoCodesToDb:
     def __init__(self):
-        self.db = db_client.DbClient()
-        self.maps = maps_client.MapsClient()
+        self.db = db_service.DbClient()
+        self.maps = maps_service.MapsService()
         self.year_rage = list(range(2014, datetime.now().year + 1))
 
     def run(self):

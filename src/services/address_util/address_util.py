@@ -1,6 +1,6 @@
 import re
 
-from src.services.address_service.address_exception import AddressException
+from src.services.address_util.address_exception import AddressException
 
 
 def build_full_address(state, city, street_address=None):

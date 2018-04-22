@@ -1,16 +1,15 @@
 import time
 
-import googlemaps
-
-import src.services.address_service.address_util as address_util
+import src.services.address_util.address_util as address_util
 import src.services.maps_service.maps_constants as constants
+from src.services.maps_service.maps_client_wrapper import MapsClientWrapper
 from src.services.maps_service.maps_exception import MapsException
 
 
-class MapsClient:
+class MapsService:
 
     def __init__(self):
-        self.maps = googlemaps.Client(key=constants.KEY)
+        self.maps = MapsClientWrapper
         self.daily_limit = constants.DAILY_LIMIT
         self.number_of_requests = 0
 

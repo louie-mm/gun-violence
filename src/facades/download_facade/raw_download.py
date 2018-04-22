@@ -2,17 +2,17 @@ import csv
 
 from src.facades.converters import csv_to_db_converter
 from src.facades.download_facade import feature_flags
-from src.services.address_service import address_util, address_exception
-from src.services.csv_service import csv_client
-from src.services.db_service import db_client
-from src.services.maps_service import maps_client, maps_exception
+from src.services.address_util import address_util, address_exception
+from src.services.csv_service import csv_service
+from src.services.db_service import db_service
+from src.services.maps_service import maps_service, maps_exception
 
 
 class CsvToDb:
     def __init__(self):
-        self.db = db_client.DbClient()
-        self.maps = maps_client.MapsClient()
-        self.csv = csv_client.CsvClient()
+        self.db = db_service.DbClient()
+        self.maps = maps_service.MapsService()
+        self.csv = csv_service.CsvService()
 
     def run(self):
         with open(self.csv.filename, 'r') as file:
@@ -35,7 +35,7 @@ class CsvToDb:
                 print(e)
 
     def _read_row_to_db(self, csv_row):
-        state, city, street_address = csv_client.get_state_city_and_street_address(csv_row)
+        state, city, street_address = csv_service.get_state_city_and_street_address(csv_row)
         _verify_if_address_is_usable(state, city, street_address)
         longitude, latitude = self._get_lat_and_long_from_address(state, city, street_address)
         db_entry = csv_to_db_converter.convert(csv_row, longitude, latitude)

@@ -1,12 +1,12 @@
 import time
 
-from src.services.db_service import db_constants, db_client
+from src.services.db_service import db_constants, db_service
 from src.ws.services import json_fields
 
 
 class ShootingsFacade:
     def __init__(self):
-        self.db = db_client.DbClient()
+        self.db = db_service.DbClient()
 
     def build_array(self):
         all_data = self.db.find_all()
