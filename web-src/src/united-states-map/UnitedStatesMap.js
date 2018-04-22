@@ -1,7 +1,8 @@
 import d3Wrap from 'react-d3-wrap';
 import * as d3 from 'd3';
 import './united-states-map.scss';
-import enter from './data-points/data-points.js'
+import enter from './data-points/data-points.js';
+// import Topojson from './USA_adm.json';
 
 
 const UnitedStatesMap = d3Wrap({
@@ -16,8 +17,7 @@ const UnitedStatesMap = d3Wrap({
     let path = d3.geoPath()
        .projection(projection);
 
-    d3.json("https://raw.githubusercontent.com/jgoodall/us-maps/master/geojson/state.geo.json", function(error, json) {
-
+    d3.json("http://localhost:8080/united-states-map/usa-geo.json", function(error, json) {
       d3.select(svg)
         .selectAll("path")
         .data(json.features)
@@ -31,10 +31,7 @@ const UnitedStatesMap = d3Wrap({
   },
 
   update (svg, data, options) {
-    //if(data == 0) return;
-    if(!options.isDataFiltered) {
-      return;
-    }
+    if(!options.isDataFiltered) return;
 
     const width = +svg.getAttribute('width');
     const height = +svg.getAttribute('height');

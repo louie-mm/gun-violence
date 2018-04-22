@@ -18,11 +18,11 @@ export default class Display extends React.Component {
   render() {
     return (
       <div>
-        {this.state.isMapLoaded &&
+        {/*this.state.isMapLoaded &&
           <Analytics
           data={this.state.filteredData}
         />
-        }
+        */}
         <UnitedStatesMap
         // TODO: This is generating a warning since it's undefined. Maybe there's a good way around this problem
           data={this.state.filteredData}

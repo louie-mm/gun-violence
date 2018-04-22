@@ -2,4 +2,5 @@
 **/venv
 **/node_modules
 **/.idea
+**/usa-shape-files
 *.pyc

@@ -9,7 +9,7 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './dist',
+    contentBase: './src',
     proxy: {
       '/ws': 'http://localhost:5000'
     }
@@ -39,7 +39,7 @@ module.exports = {
             loader: "css-loader"
           }, {
             loader: "sass-loader"
-          }
+          },
         ]
       }, {
         test: /\.(png|svg|jpg|gif)$/,
