@@ -1,8 +1,5 @@
 import unittest
-from unittest.mock import MagicMock, patch
-from src.services.maps_service.maps_service import MapsService, MapsException
-import googlemaps
-import src.services.maps_service.maps_constants as constants
+from unittest.mock import patch
 
 
 class TestMapsClient(unittest.TestCase):

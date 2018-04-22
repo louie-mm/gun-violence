@@ -19,16 +19,12 @@ export default class App extends React.Component {
     } else {
       data = this._loadData();
     }
-
-    this.setState({
-      data: data
-    })
   }
 
   render() {
     return (
       <div>
-      {this.state.data !== null && (
+      {this.state.data && (
         <Display
           data={this.state.data}
         />
@@ -38,16 +34,21 @@ export default class App extends React.Component {
   }
 
   _readStaticData() {
-    return staticShootingsData;
+    this.setState({
+      data: staticShootingsData
+    })
   }
 
   _loadData() {
     getData(
       response => {
-        return response.data;
+        this.setState({
+          data: response.data
+        })
       },
       error => {
         console.log(error);
+        return error;
       }
     )
   }
