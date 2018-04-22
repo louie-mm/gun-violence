@@ -1,0 +1,5 @@
+{
+	"transitionDurationInMilliseconds": 1000,
+	"transitionEaseMagnitude": 10,
+	"dataPointSize": 5
+}

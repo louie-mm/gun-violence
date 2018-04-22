@@ -1,6 +1,8 @@
 import React from 'react';
 import getData from './requests/requestHandler.js';
-import Display from './Display.js'
+import Display from './Display.js';
+import config from './config.json';
+import staticShootingsData from './static-shootings-data.json';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -8,13 +10,25 @@ export default class App extends React.Component {
     this.state = {
       data: null
     }
-    this._loadData();
+  }
+
+  componentDidMount() {
+    let data;
+    if(config.readStaticData) {
+      data = this._readStaticData();
+    } else {
+      data = this._loadData();
+    }
+
+    this.setState({
+      data: data
+    })
   }
 
   render() {
     return (
       <div>
-      {this.state.data != null && (
+      {this.state.data !== null && (
         <Display
           data={this.state.data}
         />
@@ -23,12 +37,14 @@ export default class App extends React.Component {
     );
   }
 
+  _readStaticData() {
+    return staticShootingsData;
+  }
+
   _loadData() {
     getData(
       response => {
-        this.setState({
-          data: response.data
-        });
+        return response.data;
       },
       error => {
         console.log(error);
