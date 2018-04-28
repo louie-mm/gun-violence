@@ -59,6 +59,7 @@ class TestMapsClient(unittest.TestCase):
     # TODO: test_response_for_daily_limit_from_google (replicate then code for soln)
     # TODO: test_responses_in_quick_succession_from_google (replicate then code soln)
     # TODO: test when request can't reach google (try calling without internet and see what happens)
+    # TODO: test_initialize_maps_client
 
 
 def geocode_success_on_second_call(value):

@@ -10,7 +10,7 @@ from src.services.maps_service import maps_service, maps_exception
 
 class CsvToDb:
     def __init__(self):
-        self.db = db_service.DbClient()
+        self.db = db_service.DbService()
         self.maps = maps_service.MapsService()
         self.csv = csv_service.CsvService()
 

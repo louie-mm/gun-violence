@@ -6,7 +6,7 @@ from src.ws.services import json_fields
 
 class ShootingsFacade:
     def __init__(self):
-        self.db = db_service.DbClient()
+        self.db = db_service.DbService()
 
     def build_array(self):
         all_data = self.db.find_all()

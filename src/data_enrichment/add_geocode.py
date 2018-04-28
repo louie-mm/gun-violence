@@ -7,7 +7,7 @@ from src.services.address_util import address_exception
 
 class AddGeoCodesToDb:
     def __init__(self):
-        self.db = db_service.DbClient()
+        self.db = db_service.DbService()
         self.maps = maps_service.MapsService()
         self.year_rage = list(range(2014, datetime.now().year + 1))
 

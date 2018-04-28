@@ -3,18 +3,17 @@ from pymongo import MongoClient, TEXT, ASCENDING
 from src.services.db_service import db_constants
 
 
-class DbClient:
+class DbService:
 
     def __init__(self):
         self.db = _initialize()
         self.attempts_to_add_existing_data = 0
 
     def add(self, db_entry):
-        if not self.contains(db_entry):
-            self._insert(db_entry)
+        if self.contains(db_entry):
+            self._data_already_exists(db_entry)
         else:
-            self.attempts_to_add_existing_data += 1
-            print('Repeated Entry: ' + str(db_entry))
+            self._insert(db_entry)
 
     def update(self, db_filter, db_entry):
         return self.db.shootings.update_one(db_filter, {'$set': db_entry})
@@ -41,6 +40,10 @@ class DbClient:
 
     def _insert(self, db_entry):
         return self.db.shootings.insert_one(db_entry)
+
+    def _data_already_exists(self, db_entry):
+        self.attempts_to_add_existing_data += 1
+        print('Repeated Entry: ' + str(db_entry))
 
 
 def _initialize():
