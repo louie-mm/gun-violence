@@ -1,10 +1,10 @@
 import React from 'react';
 import getData from './requests/requestHandler.js';
-import Display from './Display.js';
+import MapsDashboard from './MapsDashboard.js';
 import config from './config.json';
 import staticShootingsData from './static-shootings-data.json';
 
-export default class App extends React.Component {
+export default class MapsDashboardContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ export default class App extends React.Component {
     return (
       <div>
       {this.state.data && (
-        <Display
+        <MapsDashboard
           data={this.state.data}
         />
       )}

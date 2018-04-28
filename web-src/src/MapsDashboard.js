@@ -3,7 +3,7 @@ import UnitedStatesMap from './united-states-map/UnitedStatesMap.js';
 import DateSlider from './slider/DateSlider.js';
 import Analytics from './analytics/Analytics.js'
 
-export default class Display extends React.Component {
+export default class MapsDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
