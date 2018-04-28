@@ -1,10 +1,15 @@
 import * as d3 from 'd3';
-import config from './config.json'
+import config from './config.json';
+import easeAbstractFactory from './easeFactory';
 
 // TODO: Would be good if we can find a way to have deaths on top and injuries underneatd.
 // Since we can't use Z-index, alternatives could be use, wrap svg elements in divs and z-index the div
 // or sorting the dom elements directly and potentially using .front()
 export default function appendDataPoints(svg, data, projection) {
+
+  const ease = easeAbstractFactory();
+  const duration = config.transitionDurationInMilliseconds;
+  const dataPointSize = config.dataPointSize;
 
   let circle = svg.selectAll("circle")
     .data(data, function(d) {return d.longitude.toString() + d.latitude.toString() + d.date.$date.toString() + d.type});
@@ -22,9 +27,9 @@ export default function appendDataPoints(svg, data, projection) {
     })
     .attr('class', function(d) {return d.type})
     .transition()
-    .duration(config.transitionDurationInMilliseconds)
-    .ease(d3.easeBackOut.overshoot(config.transitionEaseMagnitude))
+    .duration(duration)
+    .ease(ease)
     .attr("r",function(d) {
-      return Math.sqrt(d.number) * config.dataPointSize;
+      return Math.sqrt(d.number) * dataPointSize;
     });
 }

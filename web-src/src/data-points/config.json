@@ -1,0 +1,13 @@
+{
+
+	"dataPointSize": 5,
+	"transitionDurationInMilliseconds": 500,
+	"transitionEaseMagnitude": 10,
+	"transitionEasePeriod": 10,
+
+	"__transitionEaseTypeOptions" : ["poly", "sin", "exp", "circle", "elastic", "back", "bounce"],
+	"transitionEaseType": "back",
+
+	"__transitionEaseDirectionOptions": ["in", "out", "inout"],
+	"transitionEaseDirection": "out"
+}

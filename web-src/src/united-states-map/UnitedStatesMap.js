@@ -1,7 +1,7 @@
 import d3Wrap from 'react-d3-wrap';
 import * as d3 from 'd3';
 import './united-states-map.scss';
-import appendDataPoints from './data-points/data-points.js';
+import appendDataPoints from '../data-points/data-points.js';
 import * as topojson from "topojson-client";
 
 
