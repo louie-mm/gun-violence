@@ -13,7 +13,7 @@ const UnitedStatesMap = d3Wrap({
        .projection(projection);
 
     // TODO: find a way to import the file with ES6, that way we won't need to grab the resource as a served file
-    d3.json("http://localhost:8080/united-states-map/usa-topo.json", function(error, json) {
+    d3.json("http://localhost:8080/maps-dashboard/united-states-map/usa-topo.json", function(error, json) {
       d3.select(svg)
         .selectAll("path")
         .data(topojson.feature(json, json.objects.USA_adm1).features)

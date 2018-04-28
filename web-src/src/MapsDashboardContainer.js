@@ -1,6 +1,6 @@
 import React from 'react';
 import getData from './requests/requestHandler.js';
-import MapsDashboard from './MapsDashboard.js';
+import MapsDashboard from './maps-dashboard/MapsDashboard.js';
 import config from './config.json';
 import staticShootingsData from './static-shootings-data.json';
 
