@@ -5,15 +5,25 @@ from src.services.address_util.address_exception import AddressException
 
 def build_full_address(state, city, street_address=None):
     if street_address is None:
-        if _is_valid_city(city) and _is_valid_state(state):
+        if _is_valid_address(state, city):
             return "{}, {}, USA".format(city, state)
     else:
-        if _is_valid_city(city) and _is_valid_state(state) and _is_valid_street_address(street_address):
+        if _is_valid_address(state, city, street_address):
             return "{}, {}, {}, USA".format(street_address, city, state)
     raise AddressException(_address_exception_message.format(str(street_address), str(city), str(state)))
 
 
-def is_valid_address(state, city, street_address=None):
+def is_address_usable(state, city, street_address):
+    if _is_valid_address(state, city, street_address):
+        return True
+    if _is_valid_address(state, city):
+        print('Unusual address found. Still saving to database: {}, {}, {}'.format(street_address, city, state))
+        return True
+    return False
+
+
+# TODO: Make this private - Other classes should only care if the address is usable
+def _is_valid_address(state, city, street_address=None):
     if street_address is None:
         return _is_valid_city(city) and _is_valid_state(state)
     else:
@@ -49,4 +59,4 @@ _all_states = ['alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colora
               "ky", "la", "me", "md", "ma", "mi", "mn", "ms", "mo", "mt", "ne", "nv", "nh", "nj", "nm", "ny", "nc",
               "nd", "oh", "ok", "or", "pa", "ri", "sc", "sd", "tn", "tx", "ut", "vt", "va", "wa", "wv", "wi", "wy"]
 
-_address_exception_message = "Attempt to build an invalid address: {}, {}, {}"
+_address_exception_message = "Attempt to build an unusable address: {}, {}, {}"

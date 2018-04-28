@@ -8,4 +8,7 @@ class CsvService:
 
 
 def get_state_city_and_street_address(csv_row):
-        return csv_row[csv_constants.STATE], csv_row[csv_constants.CITY], csv_row[csv_constants.ADDRESS]
+        state = csv_row[csv_constants.STATE]
+        city = csv_row[csv_constants.CITY]
+        street_address = csv_row[csv_constants.ADDRESS]
+        return state, city, street_address

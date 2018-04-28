@@ -5,26 +5,26 @@ from src.services.address_util.address_exception import AddressException
 
 
 class TestAddressValidator(unittest.TestCase):
-    def test_address_is_invalid(self):
+    def test_address_is_unusable(self):
         for invalid_city_name in ['', ' ', 'N/A', None, 434, '][}{}{', '3']:
-            is_valid = address_util.is_valid_address('alabama', invalid_city_name)
+            is_valid = address_util.is_address_usable('alabama', invalid_city_name,  '99 Pike Place')
             self.assertFalse(is_valid)
         for invalid_state_name in ['', ' ', 'N/A', None, 434, '][][', '3', 'Abu Dhabi', 'oklahooma']:
-            is_valid = address_util.is_valid_address(invalid_state_name, 'Seattle')
-            self.assertFalse(is_valid)
-        for invalid_street_address in ['', ' ', 'N/A', 434, '][][', '3']:
-            is_valid = address_util.is_valid_address('washington', 'Seattle', invalid_street_address)
+            is_valid = address_util.is_address_usable(invalid_state_name, 'Seattle', '99 Pike Place')
             self.assertFalse(is_valid)
 
     def test_address_is_valid(self):
         for valid_city_name in ['new', 'new 2', 'new \'', 'new ][][3434']:
-            is_valid = address_util.is_valid_address('alabama', valid_city_name)
+            is_valid = address_util.is_address_usable('alabama', valid_city_name, '99 Pike Place')
             self.assertTrue(is_valid)
         for valid_state_name in ['Wyoming', 'KY', 'ky', 'NORTH CAROLINA']:
-            is_valid = address_util.is_valid_address(valid_state_name, 'Seattle')
+            is_valid = address_util.is_address_usable(valid_state_name, 'Seattle', '99 Pike Place')
             self.assertTrue(is_valid)
         for valid_street_address in ['big house', '99 Pike Place']:
-            is_valid = address_util.is_valid_address('Washington', 'Seattle', valid_street_address)
+            is_valid = address_util.is_address_usable('Washington', 'Seattle', valid_street_address)
+            self.assertTrue(is_valid)
+        for invalid_street_address in ['', ' ', 'N/A', 434, '][][', '3']:
+            is_valid = address_util.is_address_usable('washington', 'Seattle', invalid_street_address)
             self.assertTrue(is_valid)
 
 
