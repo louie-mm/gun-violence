@@ -17,7 +17,7 @@ export default class MapsDashboard extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="maps-dashboard">
         {/*this.state.isMapLoaded &&
           <Analytics
           data={this.state.filteredData}
@@ -27,8 +27,8 @@ export default class MapsDashboard extends React.Component {
         <UnitedStatesMap
         // TODO: This is generating a warning since it's undefined. Maybe there's a good way around this problem
           data={this.state.filteredData}
-          width={document.getElementById('app').offsetWidth}
-          height={document.getElementById('app').offsetWidth / 2}
+          width={document.getElementById('maps-dashboard-container').offsetWidth}
+          height={document.getElementById('maps-dashboard-container').offsetWidth / 2}
           options={{
             'setMapLoadedStateToTrue': this._setMapLoadedStateToTrue,
             'isDataFiltered': this.state.filteredData != null

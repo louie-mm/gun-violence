@@ -1,8 +1,8 @@
-import * as d3 from 'd3';
+import * as d3 from 'd3';  //TODO: Only import the necessary libs
 import config from './config.json';
 import easeAbstractFactory from './easeFactory';
 
-// TODO: Would be good if we can find a way to have deaths on top and injuries underneatd.
+// TODO: Would be good if we can find a way to have deaths on top and injuries underneath.
 // Since we can't use Z-index, alternatives could be use, wrap svg elements in divs and z-index the div
 // or sorting the dom elements directly and potentially using .front()
 export default function appendDataPoints(svg, data, projection) {

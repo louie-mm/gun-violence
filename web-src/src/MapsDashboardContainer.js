@@ -3,6 +3,7 @@ import getData from './requests/requestHandler.js';
 import MapsDashboard from './maps-dashboard/MapsDashboard.js';
 import config from './config.json';
 import staticShootingsData from './static-shootings-data.json';
+import './maps-dashboard-container.scss';
 
 export default class MapsDashboardContainer extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export default class MapsDashboardContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="maps-dashboard-container">
       {this.state.data && (
         <MapsDashboard
           data={this.state.data}
