@@ -1,7 +1,7 @@
 import d3Wrap from 'react-d3-wrap';
 import * as d3 from 'd3';  //TODO: Only import the necessary libs
 import './united-states-map.scss';
-import appendDataPoints from '../data-points/data-points.js';
+import { appendDataPoints, resizeDataPoints } from '../data-points/data-points.js';
 import * as topojson from "topojson-client";  //TODO: Only import the necessary libs
 
 
@@ -24,6 +24,9 @@ const UnitedStatesMap = d3Wrap({
 
       options.setMapLoadedStateToTrue();
     });
+
+    window.addEventListener("resize", this._resize, svg);
+
   },
 
   update (svg, data, options) {
@@ -43,6 +46,29 @@ const UnitedStatesMap = d3Wrap({
     return d3.geoAlbersUsa()
       .translate([width/2, height/2])
       .scale(width); 
+  },
+
+  _resize() {
+    const width = document.getElementById('maps-dashboard-container').offsetWidth;
+    const height = width / 2;
+    const newProjection = d3.geoAlbersUsa()
+      .translate([width/2, height/2])
+      .scale(width);
+
+    const newPath = d3.geoPath()
+      .projection(newProjection);
+
+    const svg = d3.select('svg');
+
+    svg
+      .style('width', width + 'px')
+      .style('height', height + 'px');
+
+    svg
+      .selectAll('path')
+      .attr('d', newPath)
+
+    resizeDataPoints(svg, newProjection);
   }
 });
 
