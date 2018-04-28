@@ -8,7 +8,7 @@ export default class Display extends React.Component {
     super(props);
     this.state = {
       filteredData: null,
-      isMapLoaded: false
+      isMapLoaded: false,
     }
 
   this._setMapLoadedStateToTrue = this._setMapLoadedStateToTrue.bind(this);
@@ -23,17 +23,19 @@ export default class Display extends React.Component {
           data={this.state.filteredData}
         />
         */}
+        {this.state.filteredData &&
         <UnitedStatesMap
         // TODO: This is generating a warning since it's undefined. Maybe there's a good way around this problem
           data={this.state.filteredData}
-          width={950}
-          height={550}
+          width={document.getElementById('app').offsetWidth}
+          height={document.getElementById('app').offsetWidth / 2}
           options={{
             'setMapLoadedStateToTrue': this._setMapLoadedStateToTrue,
             'isDataFiltered': this.state.filteredData != null
           }}
         />
-        {this.state.isMapLoaded &&
+        }
+        {true &&
         <DateSlider
           startDate={this._getStartDate()}
           endDate={this._getEndDate()}
@@ -52,11 +54,11 @@ export default class Display extends React.Component {
   }
 
   _getStartDate() {
-    return this.props.data[0].date.$date;
+    return this.props.data[0].date.$date + 86400;
   }
 
   _getEndDate() {
-    return this.props.data[this.props.data.length - 1].date.$date;
+    return this.props.data[this.props.data.length - 1].date.$date - 86400;
   }
 
   _filterDataBySelectedDates(startDate, endDate) {

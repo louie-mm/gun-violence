@@ -42,7 +42,7 @@ const UnitedStatesMap = d3Wrap({
 
     return d3.geoAlbersUsa()
       .translate([width/2, height/2])
-      .scale([1000]); 
+      .scale(width); 
   }
 });
 
