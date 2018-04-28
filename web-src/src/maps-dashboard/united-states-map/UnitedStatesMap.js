@@ -7,10 +7,10 @@ import * as topojson from "topojson-client";  //TODO: Only import the necessary 
 
 const UnitedStatesMap = d3Wrap({
   initialize(svg, data, options) {
-    const projection = this._getUsaProjection(svg);
-
-    let path = d3.geoPath()
-       .projection(projection);
+    const width = +svg.getAttribute('width');
+    const height = +svg.getAttribute('height');
+    const projection = this._getUsaProjection(width, height);
+    const path = this._getPathFromProjection(projection);
 
     // TODO: find a way to import the file with ES6, that way we won't need to grab the resource as a served file
     d3.json("http://localhost:8080/maps-dashboard/united-states-map/usa-topo.json", function(error, json) {
@@ -25,47 +25,39 @@ const UnitedStatesMap = d3Wrap({
       options.setMapLoadedStateToTrue();
     });
 
-    window.addEventListener("resize", this._resize, svg);
-
+    window.addEventListener("resize", this._resize.bind(this));
   },
 
   update (svg, data, options) {
     if(!options.isDataFiltered) return;
-    const projection = this._getUsaProjection(svg);
+    const width = +svg.getAttribute('width');
+    const height = +svg.getAttribute('height');
+    const projection = this._getUsaProjection(width, height);
     appendDataPoints(d3.select(svg), data, projection)
   },
 
-  destroy () {
-    // Optional clean up when a component is being unmounted... 
-  },
-
-  _getUsaProjection(svg) {
-    const width = +svg.getAttribute('width');
-    const height = +svg.getAttribute('height');
-
+  _getUsaProjection(width, height) {
     return d3.geoAlbersUsa()
       .translate([width/2, height/2])
       .scale(width); 
   },
 
+  _getPathFromProjection(projection) {
+    return d3.geoPath()
+       .projection(projection);
+  },
+
   _resize() {
     const width = document.getElementById('maps-dashboard-container').offsetWidth;
     const height = width / 2;
-    const newProjection = d3.geoAlbersUsa()
-      .translate([width/2, height/2])
-      .scale(width);
-
-    const newPath = d3.geoPath()
-      .projection(newProjection);
-
+    const newProjection = this._getUsaProjection(width, height);
+    const newPath  = this._getPathFromProjection(newProjection);
     const svg = d3.select('svg');
 
-    svg
-      .style('width', width + 'px')
+    svg.style('width', width + 'px')
       .style('height', height + 'px');
 
-    svg
-      .selectAll('path')
+    svg.selectAll('path')
       .attr('d', newPath)
 
     resizeDataPoints(svg, newProjection);

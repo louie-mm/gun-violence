@@ -6,7 +6,6 @@ import easeAbstractFactory from './easeFactory';
 // Since we can't use Z-index, alternatives could be use, wrap svg elements in divs and z-index the div
 // or sorting the dom elements directly and potentially using .front()
 export function appendDataPoints(svg, data, projection) {
-
   const ease = easeAbstractFactory();
   const duration = config.transitionDurationInMilliseconds;
   const dataPointSize = config.dataPointSize;
@@ -37,7 +36,6 @@ export function appendDataPoints(svg, data, projection) {
 export function resizeDataPoints(svg, projection) {
 
   let circle = svg.selectAll("circle")
-    // .data(data, function(d) {return d.longitude.toString() + d.latitude.toString() + d.date.$date.toString() + d.type});
     .attr("cx", function(d) {
       return projection([d.longitude, d.latitude])[0];
     })
