@@ -3,6 +3,7 @@ import * as d3 from 'd3';  //TODO: Only import the necessary libs
 import './united-states-map.scss';
 import { appendDataPoints, resizeDataPoints } from '../data-points/data-points.js';
 import * as topojson from "topojson-client";  //TODO: Only import the necessary libs
+import usaTopo from './usa-topo.json'
 
 
 const UnitedStatesMap = d3Wrap({
@@ -12,18 +13,15 @@ const UnitedStatesMap = d3Wrap({
     const projection = this._getUsaProjection(width, height);
     const path = this._getPathFromProjection(projection);
 
-    // TODO: find a way to import the file with ES6, that way we won't need to grab the resource as a served file
-    d3.json("http://localhost:8080/maps-dashboard/united-states-map/usa-topo.json", function(error, json) {
-      d3.select(svg)
-        .selectAll("path")
-        .data(topojson.feature(json, json.objects.USA_adm1).features)
-        .enter()
-        .append("path")
-        .attr("d", path)
-        .attr('class', 'map');
+    d3.select(svg)
+      .selectAll("path")
+      .data(topojson.feature(usaTopo, usaTopo.objects.USA_adm1).features)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .attr('class', 'map');
 
-      options.setMapLoadedStateToTrue();
-    });
+    options.setMapLoadedStateToTrue();
 
     window.addEventListener("resize", this._resize.bind(this));
   },
