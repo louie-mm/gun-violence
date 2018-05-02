@@ -2,6 +2,8 @@ import React from 'react';
 import UnitedStatesMap from './united-states-map/UnitedStatesMap.js';
 import DateSlider from './slider/DateSlider.js';
 import Analytics from './analytics/Analytics.js'
+import RightHandPanel from './right-hand-panel/RightHandPanel.js';
+import './maps-dashboard.scss'
 
 export default class MapsDashboard extends React.Component {
   constructor(props) {
@@ -11,39 +13,42 @@ export default class MapsDashboard extends React.Component {
       isMapLoaded: false,
     }
 
-  this._setMapLoadedStateToTrue = this._setMapLoadedStateToTrue.bind(this);
-  this._filterDataBySelectedDates = this._filterDataBySelectedDates.bind(this);
+    this.unitedStatesMap = React.createRef();
+
+    this._setMapLoadedStateToTrue = this._setMapLoadedStateToTrue.bind(this);
+    this._filterDataBySelectedDates = this._filterDataBySelectedDates.bind(this);
   }
 
   render() {
     return (
-      <div id="maps-dashboard">
-        {/*this.state.isMapLoaded &&
-          <Analytics
-          data={this.state.filteredData}
-        />
-        */}
-        {this.state.filteredData &&
-        <UnitedStatesMap
-        // TODO: This is generating a warning since it's undefined. Maybe there's a good way around this problem
-          data={this.state.filteredData}
-          width={document.getElementById('maps-dashboard-container').offsetWidth}
-          height={document.getElementById('maps-dashboard-container').offsetWidth / 2}
-          options={{
-            'setMapLoadedStateToTrue': this._setMapLoadedStateToTrue,
-            'isDataFiltered': this.state.filteredData != null
-          }}
-        />
-        }
-        {true &&
+      <div>
+        <div className="maps-dashboard">
+          <div id="united-states-map" ref={this.unitedStatesMap}>
+            {this.state.filteredData &&
+              <UnitedStatesMap
+                data={this.state.filteredData}
+                width={this.unitedStatesMap.current.offsetWidth}
+                height={this.unitedStatesMap.current.offsetWidth / 2}
+                options={{
+                  'setMapLoadedStateToTrue': this._setMapLoadedStateToTrue,
+                  'isDataFiltered': this.state.filteredData != null
+                }}
+              />
+            }
+          </div>
+          <div className="right-hand-panel">
+            <RightHandPanel
+              data={this.state.filteredData}
+            />
+          </div>
+        </div>
         <DateSlider
           startDate={this._getStartDate()}
           endDate={this._getEndDate()}
           id={'united-states-map-date-slider'}
           filterDataBySelectedDates={this._filterDataBySelectedDates}
         />
-        }
-      </div>
+    </div>
     );
   }
 

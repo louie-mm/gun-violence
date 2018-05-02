@@ -48,7 +48,7 @@ const UnitedStatesMap = d3Wrap({
   },
 
   _resize() {
-    const width = document.getElementById('maps-dashboard-container').offsetWidth;
+    const width = document.getElementById('united-states-map').offsetWidth;
     const height = width / 2;
     const newProjection = this._getUsaProjection(width, height);
     const newPath  = this._getPathFromProjection(newProjection);

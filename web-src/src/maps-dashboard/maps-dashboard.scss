@@ -1,0 +1,17 @@
+.maps-dashboard {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	grid-template-rows: 1fr;
+	grid-gap: 4px;
+}
+
+#united-states-map {
+	width: 100%;
+	grid-column: 1;
+ 	grid-row: 1;
+}
+
+.right-hand-panel {
+	grid-column: 2;
+ 	grid-row: 1;
+}
