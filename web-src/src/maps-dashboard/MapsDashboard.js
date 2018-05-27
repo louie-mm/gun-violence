@@ -3,7 +3,9 @@ import UnitedStatesMap from './united-states-map/UnitedStatesMap.js';
 import DateSlider from './slider/DateSlider.js';
 import Analytics from './analytics/Analytics.js'
 import RightHandPanel from './right-hand-panel/RightHandPanel.js';
-import './maps-dashboard.scss'
+import './maps-dashboard.scss';
+
+import { unixToYymmdd } from './slider/utils/date.js';
 
 export default class MapsDashboard extends React.Component {
   constructor(props) {
@@ -59,17 +61,35 @@ export default class MapsDashboard extends React.Component {
   }
 
   _getStartDate() {
-    return this.props.data[0].date.$date + 86400;
+    return this.props.startDate;
   }
 
   _getEndDate() {
-    return this.props.data[this.props.data.length - 1].date.$date - 86400;
+    return this.props.endDate;
   }
 
-  _filterDataBySelectedDates(startDate, endDate) {
-    const filteredData = this.props.data.filter( incident => 
-      incident.date.$date >= startDate && incident.date.$date <= endDate
-    );
+  // _getStartDate() {
+  //   return this.props.data[0].date.$date + 86400;
+  // }
+
+  // _getEndDate() {
+  //   return this.props.data[this.props.data.length - 1].date.$date - 86400;
+  // }
+
+  _filterDataBySelectedDates(unixStartDate, unixEndDate) {
+    // const filteredData = this.props.data.filter( incident => 
+    //   incident.date.$date >= startDate && incident.date.$date <= endDate
+    // );
+    // this.setState({
+    //   filteredData: filteredData
+    // });
+    let filteredData = [];
+    let currentDate = unixToYymmdd(unixStartDate);
+    const allData = this.props.data;
+    while(currentDate <= unixToYymmdd(unixEndDate)) {
+      Array.prototype.push.apply(filteredData, allData[currentDate]['incidents']);
+      currentDate = allData[currentDate]['next'];
+    }
     this.setState({
       filteredData: filteredData
     });

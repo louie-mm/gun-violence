@@ -9,17 +9,14 @@ export default class MapsDashboardContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null
+      data: null,
+      startDate: null,
+      endDate: null
     }
   }
 
   componentDidMount() {
-    let data;
-    if(config.readStaticData) {
-      data = this._readStaticData();
-    } else {
-      data = this._loadData();
-    }
+    config.readStaticData ? this._readStaticData() : this._loadData();
   }
 
   render() {
@@ -28,6 +25,8 @@ export default class MapsDashboardContainer extends React.Component {
       {this.state.data && (
         <MapsDashboard
           data={this.state.data}
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
         />
       )}
       </div>
@@ -43,8 +42,11 @@ export default class MapsDashboardContainer extends React.Component {
   _loadData() {
     getData(
       response => {
+        const responseBody = response.data;
         this.setState({
-          data: response.data
+          data: responseBody.data,
+          startDate: responseBody.startDate,
+          endDate: responseBody.endDate
         })
       },
       error => {

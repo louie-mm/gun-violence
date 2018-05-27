@@ -10,5 +10,5 @@ app = Flask(__name__)
 
 @app.route('/ws/v1/shootings')
 def read_shootings_data():
-    optimized_array = ShootingsFacade().build_array()
-    return json.dumps(optimized_array, default=json_util.default)
+    response_body = ShootingsFacade().build_optimized_array()
+    return json.dumps(response_body, default=json_util.default)

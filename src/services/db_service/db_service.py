@@ -1,4 +1,4 @@
-from pymongo import MongoClient, TEXT, ASCENDING
+from pymongo import MongoClient, TEXT, DESCENDING
 
 from src.services.db_service import db_constants
 
@@ -32,8 +32,7 @@ class DbService:
             db_constants.LONGITUDE: {'$ne': None},
             db_constants.LATITUDE: {'$ne': None}
         }
-        suppress_id = {'_id': 0}
-        return list(self.db.shootings.find(lat_and_long_exist, suppress_id).sort(db_constants.DATE, ASCENDING))
+        return list(self.db.shootings.find(lat_and_long_exist).sort(db_constants.DATE, DESCENDING))
 
     def contains(self, db_entry):
         return self.db.shootings.find_one(db_entry) is not None

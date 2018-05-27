@@ -1,7 +1,7 @@
 import noUiSlider from 'nouislider';
 import React from 'react';
 import './slider.scss';
-import formatDate from './utils/date.js'
+import { formatDate, yymmddToUnix } from './utils/date.js'
 
 
 export default class DateSlider extends React.Component {
@@ -11,12 +11,8 @@ export default class DateSlider extends React.Component {
   }
 
   componentDidMount() {
-    const startDate = this.props.startDate;
-    const endDate = this.props.endDate;
-    const dateSlider = this.refs.dateSlider;
-
-    this._createSlider(startDate, endDate, dateSlider)
-    this._onMoveSliderHandles(dateSlider)    
+    this._createSlider(yymmddToUnix(this.props.startDate), yymmddToUnix(this.props.endDate) - 86400, this.refs.dateSlider)
+    this._onMoveSliderHandles(this.refs.dateSlider);
   }
 
   render() {
@@ -35,13 +31,13 @@ export default class DateSlider extends React.Component {
     }
   }
 
-  _createSlider(startDate, endDate, dateSliderRef) {
+  _createSlider(unixStartDate, unixEndDate, dateSliderRef) {
     noUiSlider.create(dateSliderRef, {
       range: {
-        'min': startDate,
-        'max': endDate
+        'min': unixStartDate,
+        'max': unixEndDate
       },
-      start: [startDate, startDate],
+      start: [unixStartDate, unixStartDate],
       connect: true,
       orientation: 'horizontal',
       behaviour: 'tap',
@@ -55,7 +51,7 @@ export default class DateSlider extends React.Component {
     var sliderTooltips = this._getSliderTooltips();
     dateSliderRef.noUiSlider.on('update', function(values, handle) {
       self.props.filterDataBySelectedDates(+values[0], +values[1]);
-      sliderTooltips[handle].innerHTML = formatDate(new Date(+values[handle]));
+      sliderTooltips[handle].innerHTML = formatDate(new Date(+values[handle] * 1000));
     })
   }
 

@@ -11,7 +11,7 @@ export function appendDataPoints(svg, data, projection) {
   const dataPointSize = config.dataPointSize;
 
   let circle = svg.selectAll("circle")
-    .data(data, function(d) {return d.longitude.toString() + d.latitude.toString() + d.date.$date.toString() + d.type});
+    .data(data, function(d) {return d.id});
 
   circle.exit()
     .remove();

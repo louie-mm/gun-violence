@@ -1,9 +1,20 @@
-export default function formatDate(date) {
+export function formatDate(date) {
     return weekdays[date.getDay()] + ", " +
         date.getDate() + nth(date.getDate()) + " " +
         months[date.getMonth()] + " " +
         date.getFullYear();
-    }
+}
+
+export function yymmddToUnix(yymmdd) {
+  return new Date(Math.floor(2000 + yymmdd / 10000), Math.floor((yymmdd % 10000) / 100) - 1, Math.floor(yymmdd % 100)).getTime() / 1000;
+}
+
+export function unixToYymmdd(unix) {
+  const date = new Date(unix * 1000);
+  return (date.getFullYear() - 2000)
+    + ('0' + (date.getMonth() + 1)).slice(-2)
+    + ('0' + date.getDate()).slice(-2);
+}
 
 const weekdays = [
     "Sunday", "Monday", "Tuesday",
