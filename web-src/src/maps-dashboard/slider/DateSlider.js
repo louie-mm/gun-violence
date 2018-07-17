@@ -45,7 +45,6 @@ export default class DateSlider extends React.Component {
     })
   }
 
-  // TODO: Lot's of room for improvement in this function
   _onMoveSliderHandles(dateSliderRef) {
     self = this;
     var sliderTooltips = this._getSliderTooltips();

@@ -7,7 +7,7 @@ import src.services.maps_service.maps_constants as constants
 from src.services.maps_service.maps_exception import MapsException
 
 
-class MapsService:
+class MapsService(object):
 
     def __init__(self):
         self.maps_client = googlemaps.Client(key=constants.KEY)

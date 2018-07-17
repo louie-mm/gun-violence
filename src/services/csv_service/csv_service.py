@@ -1,7 +1,7 @@
 from src.services.csv_service import csv_constants
 
 
-class CsvService:
+class CsvService(object):
 
     def __init__(self):
         self.filename = '../../raw_data/data_2018_02.csv'

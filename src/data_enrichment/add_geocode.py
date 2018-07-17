@@ -5,7 +5,7 @@ from src.services.maps_service import maps_service, maps_exception
 from src.services.address_util import address_exception
 
 
-class AddGeoCodesToDb:
+class AddGeoCodesToDb(object):
     def __init__(self):
         self.db = db_service.DbService()
         self.maps = maps_service.MapsService()

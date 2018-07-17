@@ -1,0 +1,10 @@
+.outside {
+	height: 200px;
+	width: 150px;
+	margin: 100px 0 0;
+
+	.inside {
+		background: yellow;
+		width: auto;
+	}
+}

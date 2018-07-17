@@ -8,7 +8,7 @@ from src.services.db_service import db_service, db_constants
 from src.services.maps_service import maps_service, maps_exception
 
 
-class CsvToDb:
+class CsvToDb(object):
     def __init__(self):
         self.db = db_service.DbService()
         self.maps = maps_service.MapsService()

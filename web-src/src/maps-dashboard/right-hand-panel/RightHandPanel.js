@@ -10,10 +10,8 @@ export default class RightHandPanel extends React.Component {
 		return (
 			<div id="right-hand-panel">
 				<Dial
-					description={"Total Deaths"}
-				/>
-				<Dial
-					description={"Daily Deaths Per Capita"}
+					totalDeaths={this.props.totalDeaths}
+					totalDeathsToDate={this.props.totalDeathsToDate}
 				/>
 			</div>
 		)

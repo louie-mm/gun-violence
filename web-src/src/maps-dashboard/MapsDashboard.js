@@ -12,7 +12,11 @@ export default class MapsDashboard extends React.Component {
     super(props);
     this.state = {
       filteredData: null,
+      totalDeathsToDate: 0,
+      totalInjuriesToDate: 0,
       isMapLoaded: false,
+      filteredDataStartDate: this._getStartDate(),
+      filteredDataEndDate: this._getStartDate()
     }
 
     this.unitedStatesMap = React.createRef();
@@ -40,7 +44,8 @@ export default class MapsDashboard extends React.Component {
           </div>
           <div className="right-hand-panel">
             <RightHandPanel
-              data={this.state.filteredData}
+              totalDeaths={this.props.totalDeaths}
+              totalDeathsToDate={this.state.totalDeathsToDate}
             />
           </div>
         </div>
@@ -68,30 +73,25 @@ export default class MapsDashboard extends React.Component {
     return this.props.endDate;
   }
 
-  // _getStartDate() {
-  //   return this.props.data[0].date.$date + 86400;
-  // }
-
-  // _getEndDate() {
-  //   return this.props.data[this.props.data.length - 1].date.$date - 86400;
-  // }
-
   _filterDataBySelectedDates(unixStartDate, unixEndDate) {
-    // const filteredData = this.props.data.filter( incident => 
-    //   incident.date.$date >= startDate && incident.date.$date <= endDate
-    // );
-    // this.setState({
-    //   filteredData: filteredData
-    // });
     let filteredData = [];
-    let currentDate = unixToYymmdd(unixStartDate);
+    const currentDateForD3 = +unixToYymmdd((unixEndDate - 604800) < unixStartDate ? unixStartDate : unixEndDate - 604800);
+    let currentDate = +unixToYymmdd(unixStartDate);
     const allData = this.props.data;
-    while(currentDate <= unixToYymmdd(unixEndDate)) {
-      Array.prototype.push.apply(filteredData, allData[currentDate]['incidents']);
+    let totalDeathsToDate = 0;
+    let totalInjuriesToDate = 0;
+    while(currentDate <= +unixToYymmdd(unixEndDate)) {
+      if(currentDate >= currentDateForD3) Array.prototype.push.apply(filteredData, allData[currentDate]['incidents']);
+      totalDeathsToDate += allData[currentDate]['totalDeathsForDate'];
+      totalInjuriesToDate += allData[currentDate]['totalInjuriesForDate'];
       currentDate = allData[currentDate]['next'];
     }
     this.setState({
-      filteredData: filteredData
+      filteredData: filteredData,
+      filteredDataStartDate: +unixToYymmdd(unixStartDate),
+      filteredDataEndDate: +unixToYymmdd(unixEndDate),
+      totalDeathsToDate: totalDeathsToDate,
+      totalInjuriesToDate: totalInjuriesToDate
     });
   }
 }

@@ -3,7 +3,7 @@ from pymongo import MongoClient, TEXT, DESCENDING
 from src.services.db_service import db_constants
 
 
-class DbService:
+class DbService(object):
 
     def __init__(self):
         self.db = _initialize()

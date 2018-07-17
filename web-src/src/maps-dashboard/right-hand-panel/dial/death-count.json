@@ -1,0 +1,34 @@
+[{
+	"event": "j",
+	"deaths": 450
+}, {
+	"event": "i",
+	"deaths": 360
+}, {
+	"event": "h",
+	"deaths": 330
+}, {
+	"event": "g",
+	"deaths": 310
+}, {
+	"event": "f",
+	"deaths": 280
+}, {
+	"event": "e",
+	"deaths": 250
+}, {
+	"event": "d",
+	"deaths": 210
+}, {
+	"event": "c",
+	"deaths": 180
+},{
+	"event": "b",
+	"deaths": 120
+}, {
+	"event": "a",
+	"deaths": 10
+}, {
+	"event": "0",
+	"deaths": 0
+}]

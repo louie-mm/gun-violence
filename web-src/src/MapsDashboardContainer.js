@@ -11,7 +11,9 @@ export default class MapsDashboardContainer extends React.Component {
     this.state = {
       data: null,
       startDate: null,
-      endDate: null
+      endDate: null,
+      totalDeaths: null,
+      totalInjuries: null
     }
   }
 
@@ -27,6 +29,8 @@ export default class MapsDashboardContainer extends React.Component {
           data={this.state.data}
           startDate={this.state.startDate}
           endDate={this.state.endDate}
+          totalDeaths={this.state.totalDeaths}
+          totalInjuries={this.state.totalInjuries}
         />
       )}
       </div>
@@ -46,7 +50,9 @@ export default class MapsDashboardContainer extends React.Component {
         this.setState({
           data: responseBody.data,
           startDate: responseBody.startDate,
-          endDate: responseBody.endDate
+          endDate: responseBody.endDate,
+          totalDeaths: responseBody.totalDeaths,
+          totalInjuries: responseBody.totalInjuries
         })
       },
       error => {
