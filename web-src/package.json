@@ -31,7 +31,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "d3": "^4.13.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.13.1",
     "nouislider": "^11.1.0",
     "react-addons-transition-group": "^15.6.2",
     "react-d3-wrap": "^2.2.1",
